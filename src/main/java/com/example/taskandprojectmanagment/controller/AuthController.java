@@ -1,4 +1,5 @@
 package com.example.taskandprojectmanagment.controller;
+
 import com.example.taskandprojectmanagment.dto.ErrorRes;
 import com.example.taskandprojectmanagment.dto.LoginReq;
 import com.example.taskandprojectmanagment.dto.LoginRes;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 @RequestMapping
@@ -28,15 +30,15 @@ public class AuthController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public ResponseEntity login(@RequestBody LoginReq loginReq)  {
+    @PostMapping(value = "/login")
+    public ResponseEntity login(@RequestBody LoginReq loginReq) {
 
         try {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginReq.getEmail(), loginReq.getPassword()));
             String email = authentication.getName();
-            User user = new User(email,"");
+            User user = new User(email, "");
             String token = jwtUtil.createToken(user);
-            LoginRes loginRes = new LoginRes(email,token);
+            LoginRes loginRes = new LoginRes(email, token);
             return ResponseEntity.ok(loginRes);
 
         }catch (BadCredentialsException e){
