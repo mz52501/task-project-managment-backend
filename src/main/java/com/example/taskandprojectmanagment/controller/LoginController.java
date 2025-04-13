@@ -10,4 +10,14 @@ class LoginController {
     public String loadForm() {
         return "home";
     }
+
+    @RequestMapping(value = "/bla", method = RequestMethod.GET)
+    public String loadForm2() {
+        return "home";
+    }
+
+    @RequestMapping(value = "/blabla", method = RequestMethod.GET)
+    public String load() {
+        return "home";
+    }
 }
