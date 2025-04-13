@@ -1,13 +1,18 @@
 package com.example.taskandprojectmanagment.model;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -51,6 +56,15 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private Set<Notification> notifications = new LinkedHashSet<>();
+
+    public User() {
+
+    }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.passwordHash = password;
+    }
 
     public Set<Notification> getNotifications() {
         return notifications;
