@@ -66,6 +66,15 @@ public class User {
         this.passwordHash = password;
     }
 
+    public User(String firstName, String lastName, String email, String password,String image, String role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.passwordHash = password;
+        this.image = image;
+        this.role = role;
+    }
+
     public Set<Notification> getNotifications() {
         return notifications;
     }

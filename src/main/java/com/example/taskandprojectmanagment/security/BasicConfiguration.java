@@ -45,7 +45,7 @@ public class BasicConfiguration {
         http.csrf().disable()
             .cors(Customizer.withDefaults())
                 .authorizeRequests()
-                .requestMatchers("/login").permitAll()
+                .requestMatchers("/login", "/register").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
