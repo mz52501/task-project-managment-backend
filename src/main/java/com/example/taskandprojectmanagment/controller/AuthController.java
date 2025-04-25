@@ -5,6 +5,7 @@ import com.example.taskandprojectmanagment.dto.LoginReq;
 import com.example.taskandprojectmanagment.dto.LoginRes;
 import com.example.taskandprojectmanagment.model.User;
 import com.example.taskandprojectmanagment.security.JwtUtil;
+import com.example.taskandprojectmanagment.security.UserDetailsImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,10 +36,9 @@ public class AuthController {
 
         try {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginReq.getEmail(), loginReq.getPassword()));
-            String email = authentication.getName();
-            User user = new User(email, "");
+            User user  =((UserDetailsImpl) authentication.getPrincipal()).getUser();
             String token = jwtUtil.createToken(user);
-            LoginRes loginRes = new LoginRes(email, token);
+            LoginRes loginRes = new LoginRes(authentication.getName(), token);
             return ResponseEntity.ok(loginRes);
 
         }catch (BadCredentialsException e){
