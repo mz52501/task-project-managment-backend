@@ -92,6 +92,14 @@ CREATE TABLE time_tracking (
                                status VARCHAR(20) CHECK (status IN ('ONGOING', 'STOPPED')),  -- Track if the time tracking is still ongoing
                                created_at TIMESTAMP DEFAULT NOW()
 );
+CREATE TABLE project_users (
+                               id SERIAL PRIMARY KEY,
+                               project_id INT NOT NULL,
+                               user_id INT NOT NULL,
+                               UNIQUE (project_id, user_id),
+                               FOREIGN KEY (project_id) REFERENCES projects(id),
+                               FOREIGN KEY (user_id) REFERENCES users(id)
+);
 
 
 

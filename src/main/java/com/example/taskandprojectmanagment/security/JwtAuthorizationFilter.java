@@ -59,6 +59,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
             mapper.writeValue(response.getWriter(), errorDetails);
+            return;
         }
         filterChain.doFilter(request, response);
     }

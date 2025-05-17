@@ -42,7 +42,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<ActivityLog> activityLogs = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private Set<Project> projects = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user")
@@ -66,12 +66,11 @@ public class User {
         this.passwordHash = password;
     }
 
-    public User(String firstName, String lastName, String email, String password,String image, String role) {
+    public User(String firstName, String lastName, String email, String password, String role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.passwordHash = password;
-        this.image = image;
         this.role = role;
     }
 
