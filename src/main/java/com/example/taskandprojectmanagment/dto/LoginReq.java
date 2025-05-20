@@ -10,6 +10,7 @@ public class LoginReq {
         this.email = email;
         this.password = password;
     }
+    public LoginReq() {}
 
     public String getEmail() {
         return email;

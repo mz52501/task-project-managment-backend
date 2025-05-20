@@ -39,17 +39,14 @@ public class User {
     @OneToMany(mappedBy = "assignedTo")
     private Set<Task> tasks = new LinkedHashSet<>();
 
+    @OneToMany(mappedBy = "createdBy")
+    private Set<Task> createdTasks = new LinkedHashSet<>();
+
     @OneToMany(mappedBy = "user")
     private Set<ActivityLog> activityLogs = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
-    private Set<Project> projects = new LinkedHashSet<>();
-
     @OneToMany(mappedBy = "user")
     private Set<Comment> comments = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "user")
-    private Set<TimeTracking> timeTrackings = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user")
     private Set<ProjectMember> projectMembers = new LinkedHashSet<>();
@@ -90,14 +87,6 @@ public class User {
         this.projectMembers = projectMembers;
     }
 
-    public Set<TimeTracking> getTimeTrackings() {
-        return timeTrackings;
-    }
-
-    public void setTimeTrackings(Set<TimeTracking> timeTrackings) {
-        this.timeTrackings = timeTrackings;
-    }
-
     public Set<Comment> getComments() {
         return comments;
     }
@@ -105,15 +94,6 @@ public class User {
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
     }
-
-    public Set<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(Set<Project> projects) {
-        this.projects = projects;
-    }
-
     public Set<ActivityLog> getActivityLogs() {
         return activityLogs;
     }
@@ -184,5 +164,13 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Set<Task> getCreatedTasks() {
+        return createdTasks;
+    }
+
+    public void setCreatedTasks(Set<Task> createdTasks) {
+        this.createdTasks = createdTasks;
     }
 }

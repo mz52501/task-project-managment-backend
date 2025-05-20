@@ -34,6 +34,10 @@ public class Task {
     private String priority;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "created_by")
+    private User createdBy;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "workflow_stage_id")
     private WorkflowStage workflowStage;
 
@@ -156,4 +160,11 @@ public class Task {
         this.id = id;
     }
 
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
 }

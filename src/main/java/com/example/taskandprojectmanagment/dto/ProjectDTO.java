@@ -1,17 +1,33 @@
 package com.example.taskandprojectmanagment.dto;
 
-import com.example.taskandprojectmanagment.model.User;
-import jakarta.persistence.*;
-
 import java.time.Instant;
+import java.util.List;
 
 public class ProjectDTO {
+    private Integer id;
     private Integer ownerId;
     private String ownerFirstName;
     private String ownerLastName;
     private String name;
     private String description;
     private Instant createdAt;
+    private List<TaskCreatorDTO> tasks;
+
+    public List<TaskCreatorDTO> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<TaskCreatorDTO> tasks) {
+        this.tasks = tasks;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getOwnerId() {
         return ownerId;

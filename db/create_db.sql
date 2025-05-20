@@ -12,7 +12,6 @@ CREATE TABLE projects (
                           id SERIAL PRIMARY KEY,
                           name VARCHAR(100) NOT NULL,
                           description TEXT,
-                          owner_id INTEGER REFERENCES users(id),
                           created_at TIMESTAMP DEFAULT NOW()
 );
 
@@ -85,12 +84,9 @@ CREATE TABLE activity_logs (
 CREATE TABLE time_tracking (
                                id SERIAL PRIMARY KEY,
                                task_id INTEGER REFERENCES tasks(id),
-                               user_id INTEGER REFERENCES users(id),
                                start_time TIMESTAMP DEFAULT NOW(),
                                end_time TIMESTAMP,    -- Time when the employee stopped tracking
-                               time_spent INTERVAL,   -- Calculated duration between start_time and end_time
                                status VARCHAR(20) CHECK (status IN ('ONGOING', 'STOPPED')),  -- Track if the time tracking is still ongoing
-                               created_at TIMESTAMP DEFAULT NOW()
 );
 CREATE TABLE project_users (
                                id SERIAL PRIMARY KEY,

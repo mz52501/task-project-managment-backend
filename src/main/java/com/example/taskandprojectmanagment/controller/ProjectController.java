@@ -31,16 +31,14 @@ public class ProjectController {
     @GetMapping("/projects/mine")
     public ResponseEntity<List<ProjectDTO>> getMyProjects(Authentication authentication) {
         User user  =((UserDetailsImpl) authentication.getPrincipal()).getUser();
-        List<Project> projects = projectService.getProjectForUser(user);
-        return ResponseEntity.ok(projectMapper.toProjectsDTO(projects));
+        return ResponseEntity.ok(projectService.getProjectForUser(user.getId()));
     }
 
     //projects that I am member of, MEMBER
     @GetMapping("/projects/member")
     public ResponseEntity<List<ProjectDTO>> getProjectsMember(Authentication authentication) {
         User user  =((UserDetailsImpl) authentication.getPrincipal()).getUser();
-        List<Project> projects = projectService.getMemberProjects(user);
-        return ResponseEntity.ok(projectMapper.toProjectsDTO(projects));
+        return ResponseEntity.ok(projectService.getMemberProjects(user.getId()));
     }
 
 }

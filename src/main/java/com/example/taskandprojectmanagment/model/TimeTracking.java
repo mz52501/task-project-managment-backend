@@ -1,8 +1,10 @@
 package com.example.taskandprojectmanagment.model;
 
+import com.example.taskandprojectmanagment.components.TimeTrackingStatus;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "time_tracking")
@@ -11,35 +13,20 @@ public class TimeTracking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
     private Task task;
 
-    @Column(name = "created_at")
-    private Instant createdAt;
+    @Column(name = "start_time")
+    private LocalDateTime startTime;
 
-    @Column(name = "time_spent")
-    private String timeSpent;
+    @Column(name = "end_time")
+    private LocalDateTime endTime;
 
-    public String getTimeSpent() {
-        return timeSpent;
-    }
-
-    public void setTimeSpent(String timeSpent) {
-        this.timeSpent = timeSpent;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private TimeTrackingStatus status;
 
     public Task getTask() {
         return task;
@@ -47,14 +34,6 @@ public class TimeTracking {
 
     public void setTask(Task task) {
         this.task = task;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public Integer getId() {
@@ -65,4 +44,27 @@ public class TimeTracking {
         this.id = id;
     }
 
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public TimeTrackingStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TimeTrackingStatus status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
 }

@@ -13,9 +13,6 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id")
-    private User owner;
 
     @Column(name = "name", nullable = false, length = 100)
     private String name;
@@ -92,14 +89,6 @@ public class Project {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
     }
 
     public Integer getId() {
