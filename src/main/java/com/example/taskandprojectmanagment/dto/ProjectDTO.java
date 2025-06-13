@@ -1,5 +1,7 @@
 package com.example.taskandprojectmanagment.dto;
 
+import com.example.taskandprojectmanagment.dto.task.TaskCreatorDTO;
+
 import java.time.Instant;
 import java.util.List;
 

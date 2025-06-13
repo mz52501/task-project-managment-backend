@@ -1,10 +1,13 @@
 package com.example.taskandprojectmanagment.controller;
 
 import com.example.taskandprojectmanagment.dto.*;
+import com.example.taskandprojectmanagment.dto.task.TaskAssigneeDTO;
+import com.example.taskandprojectmanagment.dto.task.TaskCreatorDTO;
+import com.example.taskandprojectmanagment.dto.task.TaskReq;
+import com.example.taskandprojectmanagment.dto.task.TaskRes;
 import com.example.taskandprojectmanagment.model.User;
 import com.example.taskandprojectmanagment.security.UserDetailsImpl;
 import com.example.taskandprojectmanagment.service.TaskService;
-import jakarta.servlet.ServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,13 +38,21 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getAllTasksForCreator(user.getId()));
     }
 
-    @PostMapping("/timeTracking/start")
-    public ResponseEntity<TimeTrackingRes> startTracking(@RequestBody TimeTrackingStartReq req) {
-        return ResponseEntity.ok(taskService.startTracking(req));
+    @PostMapping("/tasks")
+    public ResponseEntity<TaskRes> createTask(@RequestBody TaskReq taskReq) {
+        return ResponseEntity.ok(taskService.createTask(taskReq));
     }
 
-    @PostMapping("/timeTracking/stop")
-    public ResponseEntity<TimeTrackingRes> stopTracking(@RequestBody TimeTrackingStopReq req) {
-        return ResponseEntity.ok(taskService.stopTracking(req));
+    //Time tracking related
+
+    @PostMapping("/timeTracking")
+    public ResponseEntity<TimeTrackingRes> setTrackingEntry(@RequestBody TimeTrackingReq req) {
+        return ResponseEntity.ok(taskService.setTrackingEntry(req));
+    }
+
+    @GetMapping("/timeTracking")
+    public ResponseEntity<List<TimeTrackingRes>> getAllTrackingEntries(Authentication authentication) {
+        User user = ((UserDetailsImpl) authentication.getPrincipal()).getUser();
+        return ResponseEntity.ok(taskService.getAllTrackingEntries(user.getId()));
     }
 }

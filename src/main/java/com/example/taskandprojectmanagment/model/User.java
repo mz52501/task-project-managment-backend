@@ -54,6 +54,12 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Notification> notifications = new LinkedHashSet<>();
 
+    @OneToMany(mappedBy = "user")
+    private Set<TimeTracking> timeTrackings = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<EventAttendee> eventAttendees = new LinkedHashSet<>();
+
     public User() {
 
     }
@@ -172,5 +178,21 @@ public class User {
 
     public void setCreatedTasks(Set<Task> createdTasks) {
         this.createdTasks = createdTasks;
+    }
+
+    public Set<TimeTracking> getTimeTrackings() {
+        return timeTrackings;
+    }
+
+    public void setTimeTrackings(Set<TimeTracking> timeTrackings) {
+        this.timeTrackings = timeTrackings;
+    }
+
+    public Set<EventAttendee> getEventAttendees() {
+        return eventAttendees;
+    }
+
+    public void setEventAttendees(Set<EventAttendee> eventAttendees) {
+        this.eventAttendees = eventAttendees;
     }
 }

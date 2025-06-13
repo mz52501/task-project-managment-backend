@@ -1,4 +1,4 @@
-package com.example.taskandprojectmanagment.dto;
+package com.example.taskandprojectmanagment.dto.task;
 
 import java.time.Instant;
 

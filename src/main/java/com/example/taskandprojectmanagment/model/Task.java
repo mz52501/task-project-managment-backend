@@ -41,7 +41,7 @@ public class Task {
     @JoinColumn(name = "workflow_stage_id")
     private WorkflowStage workflowStage;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", insertable = false, updatable = false)
     private Instant createdAt;
 
     @Column(name = "due_date")
@@ -53,14 +53,27 @@ public class Task {
     @OneToMany(mappedBy = "task")
     private Set<TimeTracking> timeTrackings = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "task")
-    private Set<Subtask> subtasks = new LinkedHashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "parent_task_id")
+    private Task parentTask;
 
-    public Set<Subtask> getSubtasks() {
+    // 👇 This is the list of subtasks
+    @OneToMany(mappedBy = "parentTask", cascade = CascadeType.ALL)
+    private Set<Task> subtasks = new LinkedHashSet<>();
+
+    public Task getParentTask() {
+        return parentTask;
+    }
+
+    public void setParentTask(Task parentTask) {
+        this.parentTask = parentTask;
+    }
+
+    public Set<Task> getSubtasks() {
         return subtasks;
     }
 
-    public void setSubtasks(Set<Subtask> subtasks) {
+    public void setSubtasks(Set<Task> subtasks) {
         this.subtasks = subtasks;
     }
 

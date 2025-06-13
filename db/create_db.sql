@@ -84,9 +84,14 @@ CREATE TABLE activity_logs (
 CREATE TABLE time_tracking (
                                id SERIAL PRIMARY KEY,
                                task_id INTEGER REFERENCES tasks(id),
-                               start_time TIMESTAMP DEFAULT NOW(),
-                               end_time TIMESTAMP,    -- Time when the employee stopped tracking
-                               status VARCHAR(20) CHECK (status IN ('ONGOING', 'STOPPED')),  -- Track if the time tracking is still ongoing
+                               user_id INTEGER REFERENCES users(id),
+                               duration INTEGER NOT NULL,
+                               work_date DATE NOT NULL,
+                               comment TEXT,
+                               created_at TIMESTAMP DEFAULT NOW()
+                              // start_time TIMESTAMP DEFAULT NOW(),
+                              // end_time TIMESTAMP,    -- Time when the employee stopped tracking
+                              // status VARCHAR(20) CHECK (status IN ('ONGOING', 'STOPPED')),  -- Track if the time tracking is still ongoing
 );
 CREATE TABLE project_users (
                                id SERIAL PRIMARY KEY,
@@ -96,6 +101,23 @@ CREATE TABLE project_users (
                                FOREIGN KEY (project_id) REFERENCES projects(id),
                                FOREIGN KEY (user_id) REFERENCES users(id)
 );
+CREATE TABLE events (
+                        id SERIAL PRIMARY KEY,
+                        creator_id INTEGER NOT NULL REFERENCES users(id),
+                        project_id INTEGER REFERENCES projects(id),
+                        title VARCHAR(255) NOT NULL,
+                        event_date DATE NOT NULL,
+                        start_time TIME NOT NULL,
+                        created_at TIMESTAMP DEFAULT NOW()
+);
+CREATE TABLE event_attendees (
+                                 id SERIAL PRIMARY KEY,
+                                 event_id INTEGER NOT NULL REFERENCES events(id) ON DELETE CASCADE,
+                                 user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                                 status VARCHAR(20) DEFAULT 'INVITED' CHECK (status IN ('INVITED', 'ACCEPTED', 'DECLINED')),
+                                 UNIQUE (event_id, user_id)
+);
+
 
 
 

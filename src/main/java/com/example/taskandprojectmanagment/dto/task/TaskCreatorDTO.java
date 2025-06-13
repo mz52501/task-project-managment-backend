@@ -1,4 +1,4 @@
-package com.example.taskandprojectmanagment.dto;
+package com.example.taskandprojectmanagment.dto.task;
 
 public class TaskCreatorDTO extends TaskDTO {
     private String createdByFirstName;

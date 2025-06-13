@@ -1,8 +1,7 @@
 package com.example.taskandprojectmanagment.mapper;
 
+import com.example.taskandprojectmanagment.dto.TimeTrackingReq;
 import com.example.taskandprojectmanagment.dto.TimeTrackingRes;
-import com.example.taskandprojectmanagment.dto.TimeTrackingStartReq;
-import com.example.taskandprojectmanagment.dto.TimeTrackingStopReq;
 import com.example.taskandprojectmanagment.model.TimeTracking;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -13,12 +12,10 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface TimeTrackingMapper {
 
-    TimeTracking toTimeStart(TimeTrackingStartReq timeTrackingStartReq);
-
-    // Instead of creating a new entity for stop, update existing one
-    void updateTimeFromStartReq(TimeTrackingStopReq stopReq, @MappingTarget TimeTracking entity);
+    TimeTracking toTimeTracking(TimeTrackingReq timeTrackingReq);
 
     @Mapping(target = "taskId", source = "task.id")
+    @Mapping(target = "userId", source = "user.id")
     TimeTrackingRes toTimeRes(TimeTracking timeTracking);
 
     List<TimeTrackingRes> toTimeRes(List<TimeTracking> timeTrackings);

@@ -1,6 +1,6 @@
-package com.example.taskandprojectmanagment.dto;
+package com.example.taskandprojectmanagment.dto.task;
 
-public class TaskAssigneeDTO extends TaskDTO{
+public class TaskAssigneeDTO extends TaskDTO {
     private String assignedToFirstName;
     private String assignedToLastName;
 

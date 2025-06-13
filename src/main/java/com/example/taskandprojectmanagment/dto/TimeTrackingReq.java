@@ -1,27 +1,14 @@
 package com.example.taskandprojectmanagment.dto;
 
-import com.example.taskandprojectmanagment.components.TimeTrackingStatus;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class TimeTrackingRes {
-    private Integer id;
+public class TimeTrackingReq {
     private Integer taskId;
     private Integer userId;
     private Integer duration;
     private LocalDate workDate;
     private String comment;
-    private LocalDateTime createdAt;
-
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Integer getTaskId() {
         return taskId;
@@ -61,13 +48,5 @@ public class TimeTrackingRes {
 
     public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 }
